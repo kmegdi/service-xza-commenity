@@ -124,6 +124,15 @@
       text-shadow: 0 0 4px #0f0;
       white-space: pre-wrap;
     }
+
+    .spam-btn {
+      background: linear-gradient(135deg, #ff0000, #ff6b6b);
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+    }
+
+    .spam-btn:hover {
+      box-shadow: 0 0 20px #ff0000;
+    }
   </style>
 </head>
 <body>
@@ -134,6 +143,7 @@
     <button class="btn" onclick="showBox('remove')">🗑️ Remove Friend</button>
     <button class="btn" onclick="showBox('fetch')">📅 Fetch Days</button>
     <button class="btn" onclick="showBox('like')">❤️ Send Likes</button>
+    <button class="btn spam-btn" onclick="showBox('spam')">⚠️ Spam Friend</button>
 
     <div id="add" class="box">
       <h3>📥 Add UID</h3>
@@ -160,12 +170,18 @@
       <button class="btn" onclick="sendLikes()">🚀 Send</button>
     </div>
 
+    <div id="spam" class="box">
+      <h3>⚠️ Spam Friend</h3>
+      <input type="text" id="spam_uid" placeholder="Enter UID to spam">
+      <button class="btn spam-btn" onclick="spamFriend()">🔥 Start Spam</button>
+    </div>
+
     <div id="result"></div>
   </div>
 
   <script>
     function showBox(id) {
-      ['add', 'remove', 'fetch', 'like'].forEach(b => {
+      ['add', 'remove', 'fetch', 'like', 'spam'].forEach(b => {
         document.getElementById(b).style.display = 'none';
       });
       document.getElementById(id).style.display = 'block';
@@ -216,6 +232,28 @@
         return;
       }
       fetch('/send_likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'uid=' + encodeURIComponent(uid)
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+      })
+      .catch(err => {
+        document.getElementById('result').innerText = 'Error: ' + err;
+      });
+    }
+
+    function spamFriend() {
+      const uid = document.getElementById('spam_uid').value;
+      if (!uid) {
+        alert("Please enter a UID");
+        return;
+      }
+      fetch('/spam_friend', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
