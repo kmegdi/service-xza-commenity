@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WELCOME TO CONTROL PANEL</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #090909, #121212, #1a1a1a);
+      background-size: 400% 400%;
+      animation: bgMove 18s ease infinite;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c0c0c0;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      padding: 30px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.07);
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 30px;
+      color: #00e6d8;
+      text-shadow: 0 0 15px #00e6d8, 0 0 30px #00b3b3;
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 15px #00e6d8, 0 0 30px #00b3b3; }
+      50% { text-shadow: 0 0 30px #00ffff, 0 0 45px #00f1ff; }
+    }
+
+    .btn {
+      padding: 15px 30px;
+      margin: 8px;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #0ff, #00b3ff);
+      color: #000;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 20px #00f1ff;
+    }
+
+    .box {
+      display: none;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 25px 20px;
+      margin-top: 25px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    h3 {
+      margin-bottom: 15px;
+      font-size: 20px;
+      color: #00ffff;
+      text-shadow: 0 0 6px #00e6ff;
+    }
+
+    input {
+      padding: 12px;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.07);
+      color: #00f9ff;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    input::placeholder {
+      color: #888;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0f0;
+      text-shadow: 0 0 4px #0f0;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CONTROL PANEL BOT</h1>
+
+    <button class="btn" onclick="showBox('add')">➕ Add Friend</button>
+    <button class="btn" onclick="showBox('remove')">🗑️ Remove Friend</button>
+    <button class="btn" onclick="showBox('fetch')">📅 Fetch Days</button>
+    <button class="btn" onclick="showBox('like')">❤️ Send Likes</button>
+
+    <div id="add" class="box">
+      <h3>📥 Add UID</h3>
+      <input type="text" id="add_uid" placeholder="Enter UID here">
+      <input type="text" id="days" placeholder="Enter number of days">
+      <button class="btn" onclick="addFriend()">✔️ Submit</button>
+    </div>
+
+    <div id="remove" class="box">
+      <h3>🗑️ Remove UID</h3>
+      <input type="text" id="remove_uid" placeholder="Enter UID here">
+      <button class="btn" onclick="removeFriend()">❌ Remove</button>
+    </div>
+
+    <div id="fetch" class="box">
+      <h3>🔍 Fetch Added Days</h3>
+      <input type="text" id="fetch_uid" placeholder="Enter UID here">
+      <button class="btn" onclick="fetchDays()">🔎 Fetch</button>
+    </div>
+
+    <div id="like" class="box">
+      <h3>❤️ Send Likes</h3>
+      <input type="text" id="uidInput" placeholder="Enter UID">
+      <button class="btn" onclick="sendLikes()">🚀 Send</button>
+    </div>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function showBox(id) {
+      ['add', 'remove', 'fetch', 'like'].forEach(b => {
+        document.getElementById(b).style.display = 'none';
+      });
+      document.getElementById(id).style.display = 'block';
+      document.getElementById('result').innerText = '';
+    }
+
+    function addFriend() {
+      const uid = document.getElementById("add_uid").value;
+      const days = document.getElementById("days").value;
+      const formData = new FormData();
+      formData.append("uid", uid);
+      formData.append("days", days);
+
+      fetch("/add_friend", {
+        method: "POST",
+        body: formData
+      }).then(res => res.json()).then(data => {
+        document.getElementById("result").innerText = data.message;
+      });
+    }
+
+    function removeFriend() {
+      const uid = document.getElementById("remove_uid").value;
+      const formData = new FormData();
+      formData.append("uid", uid);
+
+      fetch("/remove_friend", {
+        method: "POST",
+        body: formData
+      }).then(res => res.json()).then(data => {
+        document.getElementById("result").innerText = data.message;
+      });
+    }
+
+    function fetchDays() {
+      const uid = document.getElementById("fetch_uid").value;
+      fetch(`/get_days?uid=${uid}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("result").innerText = data.message;
+        });
+    }
+
+    function sendLikes() {
+      const uid = document.getElementById('uidInput').value;
+      if (!uid) {
+        alert("Please enter a UID");
+        return;
+      }
+      fetch('/send_likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'uid=' + encodeURIComponent(uid)
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+      })
+      .catch(err => {
+        document.getElementById('result').innerText = 'Error: ' + err;
+      });
+    }
+  </script>
+</body>
+</html>

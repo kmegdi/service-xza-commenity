@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Developer Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(120deg, #000000, #1a1a1a, #2c2c2c);
+      background-size: 400% 400%;
+      animation: bgMove 18s ease infinite;
+      color: #ffffff;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .glass-box {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(0, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 255, 255, 0.12);
+      padding: 40px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .glass-box h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #00ffe0;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #00c3ff;
+      letter-spacing: 1px;
+    }
+
+    .desc {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 18px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 15px;
+      transition: background 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      background: rgba(0, 255, 255, 0.12);
+    }
+
+    button {
+      padding: 13px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00ffe0, #00c3ff);
+      color: black;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #00c3ff, #00ffe0);
+    }
+
+    .recaptcha {
+      margin-top: 15px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .error {
+      color: #ff4d4d;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .footer {
+      font-size: 12px;
+      margin-top: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glass-box">
+    <h1 class="title">WELCOME TO XZA PANEL</h1>
+    <p class="desc">Login to Developer Mode ⚙️</p>
+
+    <form action="/login" method="POST">
+      <input type="text" name="username" placeholder="👤 Username" required>
+      <input type="password" name="password" placeholder="🔒 Password" required>
+      <button type="submit">🚀 LOGIN</button>
+    </form>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <div class="recaptcha">✅ I’m not a robot</div>
+    <div class="footer">Powered by <strong>XZA Team</strong></div>
+  </div>
+
+</body>
+</html>
