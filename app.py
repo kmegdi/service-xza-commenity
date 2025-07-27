@@ -86,6 +86,21 @@ def send_likes():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
 
-# ✅ هنا نضيف تشغيل التطبيق بالطريقة التي طلبتها
+@app.route('/spam_friend', methods=['POST'])
+def spam_friend():
+    uid = request.form.get("uid")
+    if not uid:
+        return jsonify({"status": "error", "message": "❗ UID is required."})
+
+    try:
+        response = requests.get(f"https://spam-frend-xza.vercel.app/spam?uid={uid}")
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return jsonify({"status": "error", "message": "❌ Failed to start spam process."})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
+
+# ✅ تشغيل التطبيق
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
