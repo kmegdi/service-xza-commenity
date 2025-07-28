@@ -1,12 +1,34 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 import requests
 from datetime import datetime
-import os  # ← نحتاج هذا للوصول إلى المتغيرات البيئية
+import os
 
 app = Flask(__name__)
-app.secret_key = 'xza_secure_key'  # Important for session security
+app.secret_key = 'xza_secure_key'
 
 added_uids = {}
+
+# بيانات المطورين
+DEVELOPERS = {
+    "main_developer": {
+        "name": "@DeV_Xzanja1",
+        "role": "Main Developer",
+        "description": "المسؤول الرئيسي عن تطوير السيرفر والوظائف الأساسية",
+        "color": "#00e6d8"
+    },
+    "assistant_developer": {
+        "name": "@DeV_ERROR_1",
+        "role": "Assistant Developer",
+        "description": "يساعد في تطوير الوظائف الإضافية وصيانة السيرفر",
+        "color": "#00b3ff"
+    },
+    "server": {
+        "name": "XZA SERVER",
+        "type": "سيرفر أساسي",
+        "version": "v2.1",
+        "color": "#00ffff"
+    }
+}
 
 @app.route('/')
 def home():
@@ -27,7 +49,7 @@ def login():
 def panel():
     if not session.get('logged_in'):
         return redirect('/login')
-    return render_template('panel.html')
+    return render_template('panel.html', developers=DEVELOPERS)
 
 @app.route('/add_friend', methods=['POST'])
 def add_friend():
@@ -101,6 +123,5 @@ def spam_friend():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
 
-# ✅ تشغيل التطبيق
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
