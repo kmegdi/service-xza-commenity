@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>WELCOME TO CONTROL PANEL</title>
+  <title>⚙️ XZA Control Panel</title>
   <style>
     * {
       margin: 0;
@@ -12,14 +12,15 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #090909, #121212, #1a1a1a);
+      background: radial-gradient(circle at top left, #0f111a, #050607, #000);
       background-size: 400% 400%;
-      animation: bgMove 18s ease infinite;
-      height: 100vh;
+      animation: bgMove 20s ease infinite;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #c0c0c0;
+      padding: 20px;
     }
 
     @keyframes bgMove {
@@ -29,14 +30,14 @@
     }
 
     .container {
-      width: 90%;
-      max-width: 600px;
+      width: 100%;
+      max-width: 800px;
       padding: 30px;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.07);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.08);
       text-align: center;
       animation: fadeIn 0.8s ease;
     }
@@ -47,16 +48,16 @@
     }
 
     h1 {
-      font-size: 42px;
+      font-size: 46px;
       margin-bottom: 30px;
-      color: #00e6d8;
-      text-shadow: 0 0 15px #00e6d8, 0 0 30px #00b3b3;
-      animation: pulse 2.5s infinite;
+      color: #00faff;
+      text-shadow: 0 0 20px #00e6ff, 0 0 50px #00d0ff;
+      animation: pulse 3s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { text-shadow: 0 0 15px #00e6d8, 0 0 30px #00b3b3; }
-      50% { text-shadow: 0 0 30px #00ffff, 0 0 45px #00f1ff; }
+      0%, 100% { text-shadow: 0 0 20px #00faff, 0 0 40px #00e6ff; }
+      50% { text-shadow: 0 0 30px #00ffff, 0 0 60px #00cfff; }
     }
 
     .btn {
@@ -65,17 +66,17 @@
       font-size: 17px;
       font-weight: bold;
       border-radius: 14px;
-      border: none;
+      border: 1px solid rgba(0, 255, 255, 0.4);
       cursor: pointer;
-      background: linear-gradient(135deg, #0ff, #00b3ff);
-      color: #000;
-      box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
-      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #00ffff, #0077ff);
+      color: #ffffff;
+      box-shadow: 0 0 20px #00e6ff;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
 
     .btn:hover {
-      transform: scale(1.07);
-      box-shadow: 0 0 20px #00f1ff;
+      transform: scale(1.08);
+      box-shadow: 0 0 30px #00faff, 0 0 20px #00bfff inset;
     }
 
     .box {
@@ -84,7 +85,7 @@
       border: 1px solid #222;
       border-radius: 16px;
       padding: 25px 20px;
-      margin-top: 25px;
+      margin: 25px 0;
       animation: fadeIn 0.5s ease-in-out;
     }
 
@@ -117,27 +118,131 @@
     }
 
     #result {
-      margin-top: 20px;
+      margin: 20px 0;
       font-size: 18px;
       font-weight: bold;
       color: #0f0;
       text-shadow: 0 0 4px #0f0;
       white-space: pre-wrap;
+      min-height: 50px;
     }
 
     .spam-btn {
-      background: linear-gradient(135deg, #ff0000, #ff6b6b);
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+      background: linear-gradient(135deg, #ff0044, #ff5500);
+      box-shadow: 0 0 18px rgba(255, 20, 20, 0.7);
+      color: #fff;
     }
 
     .spam-btn:hover {
-      box-shadow: 0 0 20px #ff0000;
+      box-shadow: 0 0 30px #ff0000;
+      transform: scale(1.1);
+    }
+
+    .dev-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .dev-title {
+      font-size: 24px;
+      color: #00ffff;
+      margin: 25px 0 15px;
+      text-shadow: 0 0 10px #00ffff;
+      position: relative;
+    }
+
+    .dev-title::after {
+      content: "";
+      display: block;
+      width: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00ffff, transparent);
+      margin: 10px auto;
+    }
+
+    .dev-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .dev-card {
+      flex: 1;
+      min-width: 250px;
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 4px solid;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 0 15px #00faff44;
+      transition: transform 0.3s ease, box-shadow 0.4s ease;
+    }
+
+    .dev-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #00e6ffaa;
+    }
+
+    .dev-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .dev-role {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .dev-desc {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #ddd;
+    }
+
+    .server-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      border-top: 3px solid #00ffff;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .server-name {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #00ffff;
+    }
+
+    .server-info {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 32px;
+      }
+      .btn {
+        padding: 12px 20px;
+        font-size: 15px;
+      }
+      .dev-card {
+        min-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>CONTROL PANEL BOT</h1>
+    <h1>⚙️ XZA CONTROL PANEL</h1>
 
     <button class="btn" onclick="showBox('add')">➕ Add Friend</button>
     <button class="btn" onclick="showBox('remove')">🗑️ Remove Friend</button>
@@ -177,6 +282,29 @@
     </div>
 
     <div id="result"></div>
+
+    <div class="dev-section">
+      <div class="dev-title">DEVELOPMENT TEAM</div>
+      <div class="dev-cards">
+        <div class="dev-card" style="border-top-color: {{ developers.main_developer.color }}">
+          <div class="dev-name" style="color: {{ developers.main_developer.color }}">{{ developers.main_developer.name }}</div>
+          <div class="dev-role">{{ developers.main_developer.role }}</div>
+          <div class="dev-desc">{{ developers.main_developer.description }}</div>
+        </div>
+        <div class="dev-card" style="border-top-color: {{ developers.assistant_developer.color }}">
+          <div class="dev-name" style="color: {{ developers.assistant_developer.color }}">{{ developers.assistant_developer.name }}</div>
+          <div class="dev-role">{{ developers.assistant_developer.role }}</div>
+          <div class="dev-desc">{{ developers.assistant_developer.description }}</div>
+        </div>
+      </div>
+      <div class="server-card">
+        <div class="server-name">{{ developers.server.name }}</div>
+        <div class="server-info">
+          <span>{{ developers.server.type }}</span> | 
+          <span>{{ developers.server.version }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
