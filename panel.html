@@ -89,6 +89,15 @@
       animation: fadeIn 0.5s ease-in-out;
     }
 
+    /* NEW: Thick separator between command sections */
+    .command-separator {
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #00ffff, transparent);
+      margin: 30px 0;
+      border: none;
+      opacity: 0.5;
+    }
+
     h3 {
       margin-bottom: 15px;
       font-size: 20px;
@@ -250,6 +259,8 @@
     <button class="btn" onclick="showBox('like')">❤️ Send Likes</button>
     <button class="btn spam-btn" onclick="showBox('spam')">⚠️ Spam Friend</button>
 
+    <!-- Add Friend Section -->
+    <hr class="command-separator">
     <div id="add" class="box">
       <h3>📥 Add UID</h3>
       <input type="text" id="add_uid" placeholder="Enter UID here">
@@ -257,30 +268,39 @@
       <button class="btn" onclick="addFriend()">✔️ Submit</button>
     </div>
 
+    <!-- Remove Friend Section -->
+    <hr class="command-separator">
     <div id="remove" class="box">
       <h3>🗑️ Remove UID</h3>
       <input type="text" id="remove_uid" placeholder="Enter UID here">
       <button class="btn" onclick="removeFriend()">❌ Remove</button>
     </div>
 
+    <!-- Fetch Days Section -->
+    <hr class="command-separator">
     <div id="fetch" class="box">
       <h3>🔍 Fetch Added Days</h3>
       <input type="text" id="fetch_uid" placeholder="Enter UID here">
       <button class="btn" onclick="fetchDays()">🔎 Fetch</button>
     </div>
 
+    <!-- Send Likes Section -->
+    <hr class="command-separator">
     <div id="like" class="box">
       <h3>❤️ Send Likes</h3>
       <input type="text" id="uidInput" placeholder="Enter UID">
       <button class="btn" onclick="sendLikes()">🚀 Send</button>
     </div>
 
+    <!-- Spam Friend Section -->
+    <hr class="command-separator">
     <div id="spam" class="box">
       <h3>⚠️ Spam Friend</h3>
       <input type="text" id="spam_uid" placeholder="Enter UID to spam">
       <button class="btn spam-btn" onclick="spamFriend()">🔥 Start Spam</button>
     </div>
 
+    <hr class="command-separator">
     <div id="result"></div>
 
     <div class="dev-section">
